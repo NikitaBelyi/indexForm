@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input {
+            margin-bottom: 10px;
+        }
+        .span {
+            margin-bottom: 10px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .label {
+            display: flex;
+            flex-direction: column;
+        }
+        .button {
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: auto;
+            border: 1px solid black;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+        .result-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .prop {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .value {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+<div class="container-form">
+    <div class="form">
+        <form class="form">
+            <label class="label">
+                <span class="span">Имя</span>
+                <input class="input" title="text" id="name">
+            </label>
+
+            <label class="label">
+                <span class="span">Фамилия</span>
+                <input class="input" type="text" id="lastname">
+            </label>
+            <label class="label">
+                <span class="span">Возраст</span>
+                <input class="input" type="text" id="age">
+            </label>
+
+            <label class="label">
+                <span class="span">Увлечения</span>
+                <input class="input" type="text" id="hobby">
+            </label>
+
+        </form>
+        <button class="button" onclick="socialNetwork.add()">Зарегистрироваться</button>
+    </div>
+</div>
+<div class="result-info" id="result">
+    <!-- <div class="card">
+        <span class="prop">Имя:</span>
+        <span class="value"></span>
+
+        <span class="prop">Фамилия:</span>
+        <span class="value"></span>
+
+        <span class="prop">Возраст:</span>
+        <span class="value"></span>
+
+        <span class="prop">Увлечения:</span>
+        <span class="value"></span>
+
+    </div> -->
+</div>
+
+<script>
+
+const socialNetwork = {
+    container: null,
+    inputName: null,
+    inputLastName: null,
+    inputAge: null,
+    inputHobby: null,
+    user: [],
+
+    init() {
+        this.container = document.querySelector('#result')
+        this.inputName = document.querySelector('#name')
+        this.inputLastName = document.querySelector('#lastname')
+        this.inputAge = document.querySelector('#age')
+        this.inputHobby = document.querySelector('#hobby')
+    },
+    add() {
+        this.user.push({
+            name: this.inputName.value,
+            lastname: this.inputLastName.value,
+            age: this.inputAge.value,
+            hobby: this.inputHobby.value
+        })
+        this.render();
+    },
+    render() {
+        let template = '';
+        this.user.forEach(element => template += this.getTemlate(element))
+        this.container.innerHTML = template;
+    },
+    getTemlate(element) {
+        const {name, lastname, age, hobby} = element;
+        return `
+        <div class="card">
+            <span class="prop">Имя:</span>
+            <span class="value">${name}</span>
+
+            <span class="prop">Фамилия:</span>
+            <span class="value">${lastname}</span>
+
+            <span class="prop">Возраст:</span>
+            <span class="value">${age}</span>
+
+            <span class="prop">Увлечения:</span>
+            <span class="value">${hobby}</span>
+        </div>
+        `
+    },
+
+}
+
+
+socialNetwork.init()
+</script>
+</body>
+</html>
